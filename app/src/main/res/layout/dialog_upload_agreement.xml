@@ -1,0 +1,206 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="ohopro.com.ohopro.fragments.NewBillFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_back"
+                    android:minHeight="28dip"
+                    android:text="back"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/mediumtextsize" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:text="New Vendor AgreementForm"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/mediumtextsize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_start_date_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Agreement Start Date"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <TextView
+                    android:id="@+id/tv_start_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:gravity="center_vertical"
+                    android:hint="DD/MM/YYYY"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_end_date_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Agreement Start Date"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <TextView
+                    android:id="@+id/tv_end_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:gravity="center_vertical"
+                    android:hint="DD/MM/YYYY"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_reason_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="Description"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <EditText
+
+                    android:id="@+id/edt_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:gravity="center_vertical"
+                    android:hint="Description"
+                    android:inputType="text"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_agreement_doc_lable"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Agreement"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <TextView
+                    android:id="@+id/tv_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:ems="3"
+                    android:enabled="true"
+                    android:gravity="center_vertical"
+                    android:hint="click here to upload doc"
+                    android:maxLines="1"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <!--<Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_sign_up"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/mediumtextsize" />
+-->
+                <Button
+                    android:id="@+id/btn_submit_agreement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/form_btn_bg"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

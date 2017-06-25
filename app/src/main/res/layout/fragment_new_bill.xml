@@ -1,0 +1,246 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="ohopro.com.ohopro.fragments.NewBillFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_back"
+                    android:minHeight="28dip"
+                    android:text="back"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/mediumtextsize" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:text="Bill Submit"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/mediumtextsize" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+
+                    android:id="@+id/tv_bill_date_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Date"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <TextView
+                    android:id="@+id/edt_dates"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:gravity="center_vertical"
+                    android:hint="DD-MM-YYYY"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_bill_amount_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Amount"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <EditText
+                    android:id="@+id/edt_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:hint="Amount"
+                    android:inputType="number"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_bill_number_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Number"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <EditText
+                    android:id="@+id/edt_bill_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:hint="Bill Number"
+                    android:inputType="text"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_bill_purpose_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Provider"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <EditText
+                    android:id="@+id/edt_bill_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:hint="Providr"
+                    android:inputType="text"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_bill_Purpose"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Purpose"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <EditText
+                    android:id="@+id/edt_bill_purpose"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edt_border"
+                    android:enabled="true"
+                    android:hint="Purpose"
+                    android:inputType="text"
+                    android:paddingLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                    android:id="@+id/tv_bill_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Capture Image"
+                    android:textSize="@dimen/mediumtextsize" />
+
+                <ImageView
+                    android:id="@+id/edt_bill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/edt_border"
+                    android:src="@mipmap/open_cam" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+
+                <Button
+                    android:id="@+id/btn_submit_bill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/form_btn_bg"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="Submit Bill"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/mediumtextsize" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
