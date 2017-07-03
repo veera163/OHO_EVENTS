@@ -63,7 +63,7 @@ public class VendorEnqFormFragment extends Fragment
     ArrayList<ServicesDomain> serviceDomains;
     PlaceAutocompleteFragment placeAutocompleteFragment;
     private CharSequence[] serviceGroupStrings;
-    private CharSequence[] serviceType = new CharSequence[]{"Service Sale Item", "Service Rent Item" +
+    private CharSequence[] serviceType = new CharSequence[]{"Sale & Rent Item", "Service & Rent Item" +
             ""};
     private CharSequence[] enquiryType = new CharSequence[]{"On field", "Tele Call", "Email", "Seller Called", "In office", "Referal", "Others"};
     private CharSequence[] tittles = new CharSequence[]{"Mr.", "Mrs.", "Ms.", "Others"};
@@ -235,7 +235,8 @@ public class VendorEnqFormFragment extends Fragment
         edt_country.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                edt_details_of_enquary.requestFocus();
+                if (!b)
+                    edt_details_of_enquary.requestFocus();
             }
         });
         final Drawable upArrow = ContextCompat.getDrawable(getContext(), R.drawable.abc_ic_ab_back_material);
@@ -486,7 +487,7 @@ public class VendorEnqFormFragment extends Fragment
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_VENDOR_FORM)) {
             if (!data.isError) {
                 customProgressLoader.dismissProgressDialog();
-                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), (String) data.data, Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.ll_fragment, HomeFragment.newInstance())
                         .commit();

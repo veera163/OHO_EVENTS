@@ -57,7 +57,7 @@ public abstract class BaseHandler extends DefaultHandler {
             case ServiceMethods.WS_UPDATELEAVE:
                 return new NullResponseHandler(response);
             case ServiceMethods.WS_APP_VENDOR_FORM:
-                return new NullResponseHandler(response);
+                return new MessageHandler(response);
             case ServiceMethods.WS_LIST_SERVICECATOGIIES:
                 return new ServiceGroupHandler(response);
             case ServiceMethods.WS_APP_LIST_SERVICES:

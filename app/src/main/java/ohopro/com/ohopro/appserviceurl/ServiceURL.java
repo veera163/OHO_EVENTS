@@ -8,7 +8,7 @@ import ohopro.com.ohopro.webaccess.ServiceMethods;
  * Created by sai on 9/16/2015.
  */
 public class ServiceURL {
-    public static String HOST_URL = "http://52.204.106.22/";
+    public static String HOST_URL = "http://52.66.156.85/";
     private static String SUBMITBILL = "bills/submit";
     private static String GETBILLS = "bills/user/status";
     private static String AUTHENTICATION = "oauth/token?grant_type=password&scope=read+write&client_secret=123456&client_id=clientapp&password=";

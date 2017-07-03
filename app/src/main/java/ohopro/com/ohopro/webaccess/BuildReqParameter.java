@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import ohopro.com.ohopro.domains.VendorEnquaryDomain;
+
 /**
  * Created by Sai on 9/16/2015.
  */
@@ -186,5 +188,25 @@ public class BuildReqParameter {
         }
 
         return jsonObject.toString();
+    }
+
+    public static String getParmsForVendorForm(VendorEnquaryDomain vendorEnquaryDomain) {
+        String postParams = gson.toJson(vendorEnquaryDomain);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = new JSONObject(postParams);
+            jsonObject.remove("serviceOrSupplyLocations");
+            JSONObject textJsonObject = new JSONObject();
+            textJsonObject.put("text", vendorEnquaryDomain.getServiceOrSupplyLocations());
+            JSONArray jsonArray = new JSONArray();
+
+            jsonArray.put(textJsonObject);
+            jsonObject.put("serviceOrSupplyLocations", jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
+
     }
 }

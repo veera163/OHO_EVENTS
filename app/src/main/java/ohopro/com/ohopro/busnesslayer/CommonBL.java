@@ -139,7 +139,8 @@ public class CommonBL extends BaseBL {
 
     public boolean postVendorForm(String requestUrl, VendorEnquaryDomain vendorEnquaryDomain) {
         return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_VENDOR_FORM, requestUrl,
-                gson.toJson(vendorEnquaryDomain));
+                BuildReqParameter.getParmsForVendorForm(vendorEnquaryDomain)
+        );
     }
 
     public boolean getAllVendorServiceCatogories(String requestUrl) {
@@ -151,7 +152,7 @@ public class CommonBL extends BaseBL {
     public boolean getServices(String reqUrl, String serviceGroups, String serviceTypes) {
         return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_LIST_SERVICES,
                 reqUrl,
-                BuildReqParameter.getParamsGetServices(serviceGroups,serviceTypes));
+                BuildReqParameter.getParamsGetServices(serviceGroups, serviceTypes));
     }
 
     public boolean getAllVendors(String reqUrl) {
@@ -189,8 +190,8 @@ public class CommonBL extends BaseBL {
     }
 
     public boolean postServices(String requestUrl, String documentName, String documentType, String issuedBy, String description, String vendorId, ArrayList<String> urls) {
-        return new BaseWA(this,mContext).startDataDownload(ServiceMethods.WS_APP_POST_SERVICEDOCS,requestUrl,
-                BuildReqParameter.paramsPostServices(documentName,documentType,issuedBy,description,vendorId,urls));
+        return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_POST_SERVICEDOCS, requestUrl,
+                BuildReqParameter.paramsPostServices(documentName, documentType, issuedBy, description, vendorId, urls));
     }
 }
 

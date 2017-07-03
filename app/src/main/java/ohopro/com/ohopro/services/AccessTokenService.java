@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ohopro.com.ohopro.activity.LoginActivity;
+import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.domains.RefreshTokenDomain;
 import ohopro.com.ohopro.utility.AppConstant;
 import ohopro.com.ohopro.utility.LoggerUtils;
@@ -42,7 +43,8 @@ public class AccessTokenService extends Service {
                     PreferenceUtils preferenceUtils;
                     preferenceUtils = new PreferenceUtils(AccessTokenService.this);
                     StringBuilder urlBuilder = new StringBuilder();
-                    urlBuilder.append("http://52.204.106.22/oauth/token?grant_type=refresh_token&refresh_token=");
+                    urlBuilder.append(ServiceURL.HOST_URL);
+                    urlBuilder.append("oauth/token?grant_type=refresh_token&refresh_token=");
                     urlBuilder.append(preferenceUtils.getRefreshToken());
                     urlBuilder.append("&client_secret=123456&client_id=clientapp");
 
