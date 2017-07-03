@@ -70,6 +70,10 @@ public class BillsActivity extends AppCompatActivity
     ImageView img_back;
     Dialog dialog;
     private Dialog chooseImage;
+
+
+
+
     private final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
     private final int GALLERY_IMAGE_ACTIVITY_REQUEST_CODE = 2;
     private String image;

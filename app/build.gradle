@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'ohopro'
             keyPassword 'ohopro'
-            storeFile file('H:/praguna soft/Oho Pro/key/ohopro.jks')
+            storeFile file('F:/ohopro_android_git/oho_pro_vendor_android/app/ohopro.jks')
             storePassword 'ohopro'
         }
     }
