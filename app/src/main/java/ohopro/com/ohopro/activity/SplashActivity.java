@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent registeractivity;
-                    if (preferenceUtils.isLoggedIn()) {
+                    if (preferenceUtils.isActiveUser()) {
                         updatingAccessToken();
                         registeractivity = new Intent(SplashActivity.this, DashBoardActivity.class);
                     } else {

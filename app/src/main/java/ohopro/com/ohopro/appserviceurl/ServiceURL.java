@@ -12,7 +12,7 @@ public class ServiceURL {
     private static String SUBMITBILL = "bills/submit";
     private static String GETBILLS = "bills/user/status";
     private static String AUTHENTICATION = "oauth/token?grant_type=password&scope=read+write&client_secret=123456&client_id=clientapp&password=";
-    private static String GETUSERDETAILS = "userOperations";
+    private static String GETUSERDETAILS = "userOperationsV3";
     private static String POSTLEAVE = "leavemgmt/submit";
     private static String GETAPPLIEDLEAVES = "leavemgmt/user";
     private static String GETBILLSMGR = "bills/status";
@@ -34,6 +34,9 @@ public class ServiceURL {
     private static String DASHBOARDSTATE = "vendorDashBoardStats/";
     private static String AGREEMENTFORM = "/vendorAgreementDocs";
     private static String UPLOADSERVICE = "/vendorDocs";
+    private static String COUNTRIES = "/location/countries";
+    private static String STATES = "location/states/";
+    private static String CITIES = "location/cities/";
 
     public static int getRequestTypemethod(String methodname) {
         switch (methodname) {
@@ -93,6 +96,14 @@ public class ServiceURL {
                 return AppConstant.REQ_GET;
             case ServiceMethods.WS_APP_POST_SERVICEDOCS:
                 return AppConstant.REQ_POST;
+            case ServiceMethods.WS_APP_GET_COUNTRIES:
+                return AppConstant.REQ_GET;
+            case ServiceMethods.WS_APP_GET_STATES:
+                return AppConstant.REQ_GET;
+            case ServiceMethods.WS_APP_GET_CITIES:
+                return AppConstant.REQ_GET;
+            case ServiceMethods.WS_APP_UPDATE_VENDORFORM:
+                return AppConstant.REQ_PUT;
         }
         return 0;
 
@@ -150,6 +161,12 @@ public class ServiceURL {
                 return HOST_URL + AGREEMENTFORM;
             case ServiceMethods.WS_APP_POST_SERVICEDOCS:
                 return HOST_URL + UPLOADSERVICE;
+            case ServiceMethods.WS_APP_GET_COUNTRIES:
+                return HOST_URL + COUNTRIES;
+            case ServiceMethods.WS_APP_GET_STATES:
+                return HOST_URL + STATES;
+            case ServiceMethods.WS_APP_GET_CITIES:
+                return HOST_URL + CITIES;
         }
         return "NA";
     }

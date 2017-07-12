@@ -25,6 +25,7 @@ import ohopro.com.ohopro.busnesslayer.DataListener;
 import ohopro.com.ohopro.domains.AuthenticationDomain;
 import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.domains.UserDomain;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -96,7 +97,7 @@ public class LoginActivity extends AppCompatActivity
         Pattern MOBILEPATTERN = Pattern.compile("^[7-9][0-9]{9}$");
         Pattern USERPATTERN = Pattern.compile("^[a-z0-9_-]{3,15}$");
 
-        return Patterns.EMAIL_ADDRESS.matcher(s).matches() || MOBILEPATTERN.matcher(s).matches()||s.length()>3;
+        return Patterns.EMAIL_ADDRESS.matcher(s).matches() || MOBILEPATTERN.matcher(s).matches() || s.length() > 3;
     }
 
     private void gotoDashBoardActivity() {
@@ -149,12 +150,9 @@ public class LoginActivity extends AppCompatActivity
                             authenticationDomain.getRefresh_token(),
                             authenticationDomain.getExpires_in());
                     getUserDetails();
-
                     //gotoDashBoardActivity();
                 } else if (data.data instanceof ErrorDomain) {
-                    ErrorDomain errorDomain = (ErrorDomain) data.data;
-                    Toast.makeText(context, errorDomain.getError_description(), Toast.LENGTH_SHORT).show();
-
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 } else {
                     Toast.makeText(context, "Authentication Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -167,9 +165,10 @@ public class LoginActivity extends AppCompatActivity
                 if (data.data instanceof UserDomain) {
                     UserDomain userDetDomain = (UserDomain) data.data;
                     preferenceUtils.saveUserDetails(userDetDomain);
+                    preferenceUtils.setUserState(true);
                     gotoDashBoardActivity();
-
-
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
             }
         }

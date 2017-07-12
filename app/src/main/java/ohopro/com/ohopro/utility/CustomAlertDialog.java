@@ -20,12 +20,18 @@ import ohopro.com.ohopro.R;
 public class CustomAlertDialog extends DialogFragment {
 
     public static String MESSAGE = "message";
+    public static String LEFTTEXT = "lefttext";
+    public static String RIGHTTEXT = "righttext";
     public static String TITTLE = "titttle";
+    public static String ISDOCUBLEBUTTONS = "isdouble";
     private String message;
     private String tittle = "Alert";
-
+    private String right = "yes";
+    private String left = "no";
+    private boolean isdouble = true;
     TextView tv_tittle, tv_message;
     DialogController dialogController;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,33 +41,41 @@ public class CustomAlertDialog extends DialogFragment {
                 tittle = getArguments().getString(TITTLE);
 
             message = getArguments().getString(MESSAGE);
+
+            if (getArguments().containsKey(ISDOCUBLEBUTTONS))
+                isdouble = getArguments().getBoolean(ISDOCUBLEBUTTONS);
+
+            if (getArguments().containsKey(LEFTTEXT))
+                left = getArguments().getString(LEFTTEXT);
+
+            if (getArguments().containsKey(RIGHTTEXT))
+                right = getArguments().getString(RIGHTTEXT);
         }
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = getActivity().getLayoutInflater().inflate(R.layout.alertdialog, null);
         initViewController(view);
         tv_message.setText(message);
         tv_tittle.setText(tittle);
         builder.setView(view);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(right, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogController.clickonPositive(getTag());
             }
         });
+        if (isdouble)
+            builder.setNegativeButton(left, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogController.clickonNegative(getTag());
 
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogController.clickonNegative(getTag());
-
-            }
-        });
+                }
+            });
 
         return builder.create();
     }

@@ -38,7 +38,9 @@ import ohopro.com.ohopro.R;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.utility.AppConstant;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -86,7 +88,6 @@ public class NewBillFragment extends Fragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-
                 chooseImage.dismiss();
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -210,7 +211,7 @@ public class NewBillFragment extends Fragment
                     return;
                 }
 
-                if (new CommonBL(NewBillFragment.this, getContext()).submitaBill(
+                if (new CommonBL(NewBillFragment.this, getContext()).submitABill(
                         getRequiredUrl(),
                         edt_dates.getText().toString(),
                         edt_amount.getText().toString(),
@@ -325,6 +326,8 @@ public class NewBillFragment extends Fragment
                                 .commit();
                         Toast.makeText(getContext(), "Your Bill Successfully Updated", Toast.LENGTH_SHORT).show();
                     }
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
             }
         }

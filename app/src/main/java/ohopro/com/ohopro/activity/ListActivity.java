@@ -35,6 +35,7 @@ import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
 import ohopro.com.ohopro.domains.BillDomain;
 import ohopro.com.ohopro.domains.EmployeesDomain;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.domains.LeaveResponse;
 import ohopro.com.ohopro.domains.VendorReqDomain;
 import ohopro.com.ohopro.domains.WalletRespDOmain;
@@ -42,6 +43,7 @@ import ohopro.com.ohopro.fragments.ListOfBillsFragment;
 import ohopro.com.ohopro.utility.AppConstant;
 import ohopro.com.ohopro.utility.CurrentDate;
 import ohopro.com.ohopro.utility.CustomAlertDialog;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -119,9 +121,14 @@ public class ListActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-        getDataFromOtherActivity();
 
         //getAllLeaves();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDataFromOtherActivity();
     }
 
     private void getDataFromOtherActivity() {
@@ -242,110 +249,162 @@ public class ListActivity extends AppCompatActivity
         customProgressLoader.dismissProgressDialog();
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_GET_LEAVES)) {
             if (!data.isError) {
-                leaveResponses = (ArrayList<LeaveResponse>) data.data;
-                if (leaveResponses.size() > 0) {
-                    leavesAdapter = new LeavesAdapter(leaveResponses);
-                    leavesAdapter.setLeavesListener(this);
-                    rv_leaves.setAdapter(leavesAdapter);
+                if (data.data instanceof ArrayList) {
+                    leaveResponses = (ArrayList<LeaveResponse>) data.data;
+                    if (leaveResponses.size() > 0) {
+                        leavesAdapter = new LeavesAdapter(leaveResponses);
+                        leavesAdapter.setLeavesListener(this);
+                        rv_leaves.setAdapter(leavesAdapter);
+                    } else {
+                        tv_not_found.setVisibility(View.VISIBLE);
+                        rv_leaves.setVisibility(View.GONE);
+                    }
                 } else {
-                    tv_not_found.setVisibility(View.VISIBLE);
-                    rv_leaves.setVisibility(View.GONE);
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
+
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.GETBILLS_MGR)) {
-            billDomains = (ArrayList<BillDomain>) data.data;
-            if (billDomains.size() > 0) {
-                billsAdapter = new BillsAdapter(billDomains);
-                billsAdapter.registerAListener(this);
-                rv_leaves.setAdapter(billsAdapter);
-            } else {
-                tv_not_found.setVisibility(View.VISIBLE);
-                rv_leaves.setVisibility(View.GONE);
+            if (!data.isError) {
+                if (data.data instanceof ArrayList) {
+                    billDomains = (ArrayList<BillDomain>) data.data;
+                    if (billDomains.size() > 0) {
+                        billsAdapter = new BillsAdapter(billDomains);
+                        billsAdapter.registerAListener(this);
+                        rv_leaves.setAdapter(billsAdapter);
+                    } else {
+                        tv_not_found.setVisibility(View.VISIBLE);
+                        rv_leaves.setVisibility(View.GONE);
+                    }
+                } else {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
+
             }
+
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_APPROVEBILL)) {
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200)
-                    billDomains.remove(billDomain);
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200)
+                        billDomains.remove(billDomain);
 
-                billsAdapter.notifyDataSetChanged();
+                    billsAdapter.notifyDataSetChanged();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
 
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.GETLEAVES_MGR)) {
             if (!data.isError) {
-                leaveResponses = (ArrayList<LeaveResponse>) data.data;
-                if (leaveResponses.size() > 0) {
-                    leavesAdapter = new LeavesAdapter(leaveResponses);
-                    leavesAdapter.setLeavesListener(this);
-                    rv_leaves.setAdapter(leavesAdapter);
-                } else {
-                    tv_not_found.setVisibility(View.VISIBLE);
-                    rv_leaves.setVisibility(View.GONE);
+                if (data.data instanceof ArrayList) {
+                    leaveResponses = (ArrayList<LeaveResponse>) data.data;
+                    if (leaveResponses.size() > 0) {
+                        leavesAdapter = new LeavesAdapter(leaveResponses);
+                        leavesAdapter.setLeavesListener(this);
+                        rv_leaves.setAdapter(leavesAdapter);
+                    } else {
+                        tv_not_found.setVisibility(View.VISIBLE);
+                        rv_leaves.setVisibility(View.GONE);
+                    }
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_UPDATE_LEAVE_MNGR)) {
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200)
-                    leaveResponses.remove(leaveResponse);
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200)
+                        leaveResponses.remove(leaveResponse);
 
-                leavesAdapter.notifyDataSetChanged();
+                    leavesAdapter.notifyDataSetChanged();
 
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_MONEY_REQS)) {
             if (!data.isError) {
-                walletRespDOmains = (ArrayList<WalletRespDOmain>) data.data;
-                if (walletRespDOmains.size() > 0) {
-                    moneyReqsAdapter = new MoneyReqsAdapter(walletRespDOmains);
-                    moneyReqsAdapter.setLeavesListener(this);
-                    rv_leaves.setAdapter(moneyReqsAdapter);
-                } else {
-                    tv_not_found.setVisibility(View.VISIBLE);
-                    rv_leaves.setVisibility(View.GONE);
+                if (data.data instanceof ArrayList) {
+                    walletRespDOmains = (ArrayList<WalletRespDOmain>) data.data;
+                    if (walletRespDOmains.size() > 0) {
+                        moneyReqsAdapter = new MoneyReqsAdapter(walletRespDOmains);
+                        moneyReqsAdapter.setLeavesListener(this);
+                        rv_leaves.setAdapter(moneyReqsAdapter);
+                    } else {
+                        tv_not_found.setVisibility(View.VISIBLE);
+                        rv_leaves.setVisibility(View.GONE);
+                    }
+
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+
                 }
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.APPROVE_MONEY_REQ)) {
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200)
-                    walletRespDOmains.remove(walletRespDOmain);
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200)
+                        walletRespDOmains.remove(walletRespDOmain);
 
-                moneyReqsAdapter.notifyDataSetChanged();
-
+                    moneyReqsAdapter.notifyDataSetChanged();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_UPDATELEAVE)) {
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200) {
-                    dialog.dismiss();
-                    customProgressLoader.dismissProgressDialog();
-                    getDataFromOtherActivity();
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200) {
+                        dialog.dismiss();
+                        customProgressLoader.dismissProgressDialog();
+                        getDataFromOtherActivity();
+                    }
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
+
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_VENDORSLIST)) {
             if (!data.isError) {
-                vendorReqDomains = (ArrayList<VendorReqDomain>) data.data;
-                vendorReqsAdapter = new VendorReqsAdapter(vendorReqDomains, this);
-                rv_leaves.setAdapter(vendorReqsAdapter);
                 customProgressLoader.dismissProgressDialog();
+                if (data.data instanceof ArrayList) {
+                    vendorReqDomains = (ArrayList<VendorReqDomain>) data.data;
+                    vendorReqsAdapter = new VendorReqsAdapter(vendorReqDomains, this);
+                    rv_leaves.setAdapter(vendorReqsAdapter);
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.GET_ALL_EMPLOYEES)) {
             if (!data.isError) {
-                isEmployeesLoaded = true;
-                employeesDomains = (ArrayList<EmployeesDomain>) data.data;
-                employeesList = new CharSequence[employeesDomains.size()];
+                if (data.data instanceof ArrayList) {
+                    isEmployeesLoaded = true;
+                    employeesDomains = (ArrayList<EmployeesDomain>) data.data;
+                    employeesList = new CharSequence[employeesDomains.size()];
 
-                for (int i = 0; i < employeesDomains.size(); i++)
-                    employeesList[i] = employeesDomains.get(i).getFirstname() + " " +
-                            employeesDomains.get(i).getLastname();
+                    for (int i = 0; i < employeesDomains.size(); i++)
+                        employeesList[i] = employeesDomains.get(i).getFirstname() + " " +
+                                employeesDomains.get(i).getLastname();
 
-                assignFormToEmployee();
+                    assignFormToEmployee();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
                 customProgressLoader.dismissProgressDialog();
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_ASSIGN_TO_EMP)) {
             if (!data.isError) {
+                if (data.data instanceof Integer) {
+                    alertDialog.dismiss();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
+
+                }
                 customProgressLoader.dismissProgressDialog();
-                alertDialog.dismiss();
             }
         }
     }
@@ -436,14 +495,13 @@ public class ListActivity extends AppCompatActivity
                 Toast.makeText(context, "Already Approved", Toast.LENGTH_SHORT).show();
             else
                 updateLeave(leaveResponse);
-
     }
 
     TextView tv_start_dates;
     Button btn_submit_bill, btn_back;
 
     private void updateLeave(final LeaveResponse leaveResponse) {
-        final EditText edt_reason, edt_num_of_days, edt_emergenct_number;
+       /* final EditText edt_reason, edt_num_of_days, edt_emergenct_number;
 
         View view = getLayoutInflater().inflate(R.layout.fragment_request_leave, null);
         builder.setView(view);
@@ -508,7 +566,13 @@ public class ListActivity extends AppCompatActivity
 
         dialog = builder.create();
         dialog.show();
-
+*/
+        Intent intent = new Intent(context, LeaveApplyFormActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(AppConstant.ACTION, AppConstant.EDIT);
+        bundle.putParcelable(AppConstant.DATAOBJECT, leaveResponse);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private String getDateFromGivenInputs(String date, int numOfDays) {
@@ -579,10 +643,20 @@ public class ListActivity extends AppCompatActivity
     @Override
     public void onClickOnVendorForm(VendorReqDomain vendorReqDomain) {
         this.vendorReqDomain = vendorReqDomain;
-        if (!isEmployeesLoaded)
+        AppConstant.vendorReqDomain = vendorReqDomain;
+        gotoVendorEditActivity();
+       /* if (!isEmployeesLoaded)
             getAllEmployees();
         else
-            assignFormToEmployee();
+            assignFormToEmployee();*/
+    }
+
+    private void gotoVendorEditActivity() {
+        Intent intent = new Intent(context, VendorFormActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(AppConstant.ACTION, AppConstant.EDIT);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void assignFormToEmployee() {

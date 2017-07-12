@@ -18,7 +18,7 @@ public class VendorEnquaryDomain {
     private String addressLine2;
     private String town;
     private String city;
-    private String postalCode;;
+    private String postalCode;
     private String country;
     private String productOrServiceGroup;
     private String productOrServiceType;
@@ -31,6 +31,25 @@ public class VendorEnquaryDomain {
     private String dateOfEnquiry;
     private String timeOfEnquiry;
     private String enquiredEmployee;
+    private String state;
+
+    public String getOtherEnquiryType() {
+        return otherEnquiryType;
+    }
+
+    public void setOtherEnquiryType(String otherEnquiryType) {
+        this.otherEnquiryType = otherEnquiryType;
+    }
+
+    private String otherEnquiryType;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public String getTitle() {
         return title;

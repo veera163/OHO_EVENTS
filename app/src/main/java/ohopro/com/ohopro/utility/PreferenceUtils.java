@@ -23,6 +23,7 @@ public class PreferenceUtils {
     private SharedPreferences.Editor tempEditor;
 
     private String KEY_IS_LOGIN = "IsLoggedIn";
+    private String KEY_USER_STATE = "userState";
     private String KEY_ACCESSTOKEN = "accessToken";
     private String KEY_REFRESHTOKEN = "refreshToken";
     private String KEY_CUSTOMER_NAME = "customername";
@@ -53,6 +54,15 @@ public class PreferenceUtils {
 
     public boolean isLoggedIn() {
         return preferences.getBoolean(KEY_IS_LOGIN, false);
+    }
+
+    public boolean isActiveUser() {
+        return preferences.getBoolean(KEY_USER_STATE, false);
+    }
+
+    public void setUserState(boolean status) {
+        edit.putBoolean(KEY_USER_STATE, status);
+        edit.commit();
     }
 
     public void saveAccessTokenRefreshToken(String accessToken, String refreshToken, int expires_in) {

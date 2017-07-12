@@ -14,16 +14,21 @@ import ohopro.com.ohopro.R;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
+import ohopro.com.ohopro.domains.ErrorDomain;
+import ohopro.com.ohopro.utility.CustomAlertDialog;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
 import ohopro.com.ohopro.webaccess.ServiceMethods;
 
 public class AddMoneyFragment extends Fragment
-        implements DataListener {
+        implements DataListener, CustomAlertDialog.DialogController {
 
     EditText edt_contact_num, edt_amount;
     Button btn_add_money, btn_back;
     CustomProgressLoader customProgressLoader;
+    CustomAlertDialog customAlertDialog;
+    private String NORMALMESSAGE = "normalMessage";
 
     public AddMoneyFragment() {
         // Required empty public constructor
@@ -48,6 +53,7 @@ public class AddMoneyFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         customProgressLoader = new CustomProgressLoader(getContext());
+        customAlertDialog = new CustomAlertDialog();
         View view = inflater.inflate(R.layout.fragment_add_money, container, false);
         initViewController(view);
         return view;
@@ -110,9 +116,13 @@ public class AddMoneyFragment extends Fragment
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_ADD_MONEY)) {
             customProgressLoader.dismissProgressDialog();
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200)
-                    getFragmentManager().beginTransaction().replace(R.id.ll_fragment, HomeFragment.newInstance()).commit();
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200)
+                        getFragmentManager().beginTransaction().replace(R.id.ll_fragment, HomeFragment.newInstance()).commit();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
 
             }
         }
@@ -121,5 +131,15 @@ public class AddMoneyFragment extends Fragment
     @Override
     public void opennetworksetting() {
 
+    }
+
+    @Override
+    public void clickonPositive(String tag) {
+        customAlertDialog.dismiss();
+    }
+
+    @Override
+    public void clickonNegative(String tag) {
+        customAlertDialog.dismiss();
     }
 }

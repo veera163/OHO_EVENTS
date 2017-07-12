@@ -19,6 +19,8 @@ import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
 import ohopro.com.ohopro.domains.BillDomain;
+import ohopro.com.ohopro.domains.ErrorDomain;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -142,6 +144,8 @@ public class ListOfBillsFragment extends Fragment
                         }
                     });
                     rlst_bills.setAdapter(billsAdapter);
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
             }
         }

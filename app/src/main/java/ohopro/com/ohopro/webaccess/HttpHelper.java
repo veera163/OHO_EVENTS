@@ -77,7 +77,7 @@ public class HttpHelper {
 
                 urlConnection.connect();
 
-                //Get Response
+                //Get ServiceOrSupplyLocations
 
                 statuscode = urlConnection.getResponseCode();
 
@@ -192,7 +192,7 @@ public class HttpHelper {
 
                 urlConnection.connect();
 
-                //Get Response
+                //Get ServiceOrSupplyLocations
 
                 statuscode = urlConnection.getResponseCode();
 
@@ -301,14 +301,14 @@ public class HttpHelper {
 
                 connection.connect();
 
-                //Get Response
+                //Get ServiceOrSupplyLocations
 
                 statuscode = connection.getResponseCode();
 
                 LoggerUtils.debug(HttpHelper.class.getSimpleName(), "HTTP STATUS CODE is" + statuscode);
 
                 if (statuscode == HttpURLConnection.HTTP_OK) {
-                    InputStream responseStream = connection.getInputStream();
+                    InputStream responseStream = new BufferedInputStream(connection.getInputStream());
 
                     BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
 
@@ -320,6 +320,55 @@ public class HttpHelper {
                     responseStreamReader.close();
 
                     response = stringBuilder.toString();
+                    if (response.equalsIgnoreCase("")) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("statusCode", 200);
+                        response = jsonObject.toString();
+                    }
+                } else if (statuscode == HttpURLConnection.HTTP_BAD_REQUEST) {
+                    InputStream responseStream = new BufferedInputStream(connection.getErrorStream());
+
+                    BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+
+                    String line = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((line = responseStreamReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    responseStreamReader.close();
+
+                    response = stringBuilder.toString();
+                    if (response.equalsIgnoreCase("")) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("statusCode", HttpURLConnection.HTTP_BAD_REQUEST);
+                        response = jsonObject.toString();
+                    }
+                } else if (statuscode == HttpURLConnection.HTTP_UNAUTHORIZED ||
+                        statuscode == HttpURLConnection.HTTP_FORBIDDEN ||
+                        statuscode == HttpURLConnection.HTTP_UNSUPPORTED_TYPE) {
+                    InputStream responseStream = new BufferedInputStream(connection.getErrorStream());
+
+                    BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+
+                    String line = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((line = responseStreamReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    responseStreamReader.close();
+
+                    response = stringBuilder.toString();
+                    if (response.equalsIgnoreCase("")) {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("statusCode", statuscode);
+                        response = jsonObject.toString();
+                    }
+                } else if (statuscode == HttpURLConnection.HTTP_INTERNAL_ERROR ||
+                        statuscode == HttpURLConnection.HTTP_NOT_FOUND) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("error", HttpURLConnection.HTTP_BAD_REQUEST);
+                    jsonObject.put("error_description", "Internal Server error");
+                    response = jsonObject.toString();
                 } else {
                     response = AppConstant.NO_RESPONSE;
                 }
@@ -375,7 +424,7 @@ public class HttpHelper {
 
                 urlConnection.connect();
 
-                //Get Response
+                //Get ServiceOrSupplyLocations
 
                 statuscode = urlConnection.getResponseCode();
 
@@ -417,6 +466,12 @@ public class HttpHelper {
                         jsonObject.put("statusCode", HttpURLConnection.HTTP_BAD_REQUEST);
                         response = jsonObject.toString();
                     }
+                } else if (statuscode == HttpURLConnection.HTTP_INTERNAL_ERROR ||
+                        statuscode == HttpURLConnection.HTTP_NOT_FOUND) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("error", HttpURLConnection.HTTP_BAD_REQUEST);
+                    jsonObject.put("error_description", "Internal Server error");
+                    response = jsonObject.toString();
                 } else {
                     response = AppConstant.NO_RESPONSE;
                 }

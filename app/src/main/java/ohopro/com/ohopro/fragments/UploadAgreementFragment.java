@@ -51,7 +51,9 @@ import ohopro.com.ohopro.activity.DashBoardActivity;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.utility.AppConstant;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.LoggerUtils;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
@@ -303,15 +305,23 @@ public class UploadAgreementFragment extends Fragment
     public void dataRetreived(Response data) {
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.UPLOADAGREEMENT)) {
             if (!data.isError) {
-                Integer statusCode = (Integer) data.data;
-                if (statusCode == HttpURLConnection.HTTP_OK) {
-                    customProgressLoader.dismissProgressDialog();
-                    Toast.makeText(getContext(), "Your Agreement Successfully Uploaded", Toast.LENGTH_SHORT).show();
-                    alertDialog.dismiss();
+                if (data.data instanceof Integer) {
+                    Integer statusCode = (Integer) data.data;
+                    if (statusCode == HttpURLConnection.HTTP_OK) {
+                        customProgressLoader.dismissProgressDialog();
+                        Toast.makeText(getContext(), "Your Agreement Successfully Uploaded", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
+
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.GETALLAGREEMENTS)) {
             if (!data.isError) {
+                if (data.data instanceof ErrorDomain)
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+
                 customProgressLoader.dismissProgressDialog();
             }
         }

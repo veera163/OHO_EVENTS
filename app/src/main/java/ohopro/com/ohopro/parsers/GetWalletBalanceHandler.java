@@ -2,6 +2,7 @@ package ohopro.com.ohopro.parsers;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import ohopro.com.ohopro.domains.ErrorDomain;
@@ -19,7 +20,12 @@ public class GetWalletBalanceHandler extends BaseHandler {
     ErrorDomain errorDomain;
 
     public GetWalletBalanceHandler(String response) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         if (jsonObject.has("error")) {
             errorDomain = gson.fromJson(response, ErrorDomain.class);
@@ -41,6 +47,6 @@ public class GetWalletBalanceHandler extends BaseHandler {
 
     @Override
     public String getErrorData() {
-        return errorMessage;
+        return AppConstant.OK_RESPONSE;
     }
 }

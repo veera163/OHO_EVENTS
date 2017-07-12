@@ -358,6 +358,7 @@ public class DashBoardActivity extends AppCompatActivity
     public void dataRetreived(Response data) {
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_DASHBOARDSTATE)) {
             if (!data.isError) {
+
                 AppConstant.dashBoardStatesDomain = (DashBoardStatesDomain) data.data;
                 customProgressLoader.dismissProgressDialog();
             }

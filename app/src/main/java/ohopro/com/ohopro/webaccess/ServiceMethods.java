@@ -33,4 +33,8 @@ public interface ServiceMethods {
     String UPLOADAGREEMENT = "uploadAgreement";
     String GETALLAGREEMENTS = "getAllAgreements";
     String WS_APP_POST_SERVICEDOCS = "uploadservicedocs";
+    String WS_APP_GET_COUNTRIES = "getCountries";
+    String WS_APP_GET_STATES = "getStates";
+    String WS_APP_GET_CITIES= "getCities";
+    String WS_APP_UPDATE_VENDORFORM = "updateVendorForm";
 }

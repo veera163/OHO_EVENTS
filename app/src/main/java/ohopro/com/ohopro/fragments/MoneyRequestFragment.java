@@ -17,6 +17,8 @@ import ohopro.com.ohopro.R;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
+import ohopro.com.ohopro.domains.ErrorDomain;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -119,10 +121,13 @@ public class MoneyRequestFragment extends Fragment
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_ADD_MONEY_REQ)) {
             customProgressLoader.dismissProgressDialog();
             if (!data.isError) {
-                int statuscode = (int) data.data;
-                if (statuscode == 200)
-                    getFragmentManager().beginTransaction().replace(R.id.ll_fragment, HomeFragment.newInstance()).commit();
-
+                if (data.data instanceof Integer) {
+                    int statuscode = (int) data.data;
+                    if (statuscode == 200)
+                        getFragmentManager().beginTransaction().replace(R.id.ll_fragment, HomeFragment.newInstance()).commit();
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
             }
         }
     }

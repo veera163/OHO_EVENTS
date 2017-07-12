@@ -1,6 +1,9 @@
 package ohopro.com.ohopro.domains;
 
-public class BillDomain {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BillDomain implements Parcelable {
     private String billImgaeUrl;
     private String comments;
     private String billImage;
@@ -18,6 +21,38 @@ public class BillDomain {
     private String billProvider;
     private String status;
     private String purpose;
+
+    protected BillDomain(Parcel in) {
+        billImgaeUrl = in.readString();
+        comments = in.readString();
+        billImage = in.readString();
+        approvedBy = in.readString();
+        emailId = in.readString();
+        billDate = in.readString();
+        billImageName = in.readString();
+        userId = in.readString();
+        approvedOn = in.readString();
+        billAmount = in.readString();
+        phone = in.readString();
+        billId = in.readString();
+        billNumber = in.readString();
+        billImageUrl = in.readString();
+        billProvider = in.readString();
+        status = in.readString();
+        purpose = in.readString();
+    }
+
+    public static final Creator<BillDomain> CREATOR = new Creator<BillDomain>() {
+        @Override
+        public BillDomain createFromParcel(Parcel in) {
+            return new BillDomain(in);
+        }
+
+        @Override
+        public BillDomain[] newArray(int size) {
+            return new BillDomain[size];
+        }
+    };
 
     public void setBillImgaeUrl(String billImgaeUrl) {
         this.billImgaeUrl = billImgaeUrl;
@@ -153,5 +188,31 @@ public class BillDomain {
 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(billImgaeUrl);
+        parcel.writeString(comments);
+        parcel.writeString(billImage);
+        parcel.writeString(approvedBy);
+        parcel.writeString(emailId);
+        parcel.writeString(billDate);
+        parcel.writeString(billImageName);
+        parcel.writeString(userId);
+        parcel.writeString(approvedOn);
+        parcel.writeString(billAmount);
+        parcel.writeString(phone);
+        parcel.writeString(billId);
+        parcel.writeString(billNumber);
+        parcel.writeString(billImageUrl);
+        parcel.writeString(billProvider);
+        parcel.writeString(status);
+        parcel.writeString(purpose);
     }
 }

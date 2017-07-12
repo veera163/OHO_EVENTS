@@ -49,6 +49,6 @@ public class DashBoardStateHandler extends BaseHandler {
 
     @Override
     public String getErrorData() {
-        return errorMessage;
+        return AppConstant.OK_RESPONSE;
     }
 }

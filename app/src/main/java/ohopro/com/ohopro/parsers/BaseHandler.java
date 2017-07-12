@@ -58,6 +58,8 @@ public abstract class BaseHandler extends DefaultHandler {
                 return new NullResponseHandler(response);
             case ServiceMethods.WS_APP_VENDOR_FORM:
                 return new MessageHandler(response);
+            case ServiceMethods.WS_APP_UPDATE_VENDORFORM:
+                return new MessageHandler(response);
             case ServiceMethods.WS_LIST_SERVICECATOGIIES:
                 return new ServiceGroupHandler(response);
             case ServiceMethods.WS_APP_LIST_SERVICES:
@@ -76,6 +78,12 @@ public abstract class BaseHandler extends DefaultHandler {
                 return new GetAllAgreements(response);
             case ServiceMethods.WS_APP_POST_SERVICEDOCS:
                 return new NullResponseHandler(response);
+            case ServiceMethods.WS_APP_GET_COUNTRIES:
+                return new NamesGetterHandler(response);
+            case ServiceMethods.WS_APP_GET_STATES:
+                return new NamesGetterHandler(response);
+            case ServiceMethods.WS_APP_GET_CITIES:
+                return new NamesGetterHandler(response);
         }
         return null;
     }

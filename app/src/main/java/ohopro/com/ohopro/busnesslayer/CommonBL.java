@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import ohopro.com.ohopro.domains.BillDomain;
 import ohopro.com.ohopro.domains.LeaveResponse;
 import ohopro.com.ohopro.domains.VendorEnquaryDomain;
+import ohopro.com.ohopro.domains.VendorReqDomain;
 import ohopro.com.ohopro.utility.AppConstant;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.webaccess.BaseWA;
@@ -29,11 +30,9 @@ public class CommonBL extends BaseBL {
             AppConstant.HEADER = "Bearer " + preferenceUtils.getAccessToken();
         else
             AppConstant.HEADER = "Basic Y2xpZW50YXBwOjEyMzQ1Ng==";
-
     }
 
-
-    public boolean submitaBill(String requesturl, String date, String amount, String billNumber, String userMobile, String userEmail, String image, String purpose, String provider) {
+    public boolean submitABill(String requesturl, String date, String amount, String billNumber, String userMobile, String userEmail, String image, String purpose, String provider) {
         return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_SUBMITABILL, requesturl,
                 BuildReqParameter.getParamsToPostBill(date, amount, billNumber, userMobile, userEmail, image, purpose, provider));
     }
@@ -192,6 +191,24 @@ public class CommonBL extends BaseBL {
     public boolean postServices(String requestUrl, String documentName, String documentType, String issuedBy, String description, String vendorId, ArrayList<String> urls) {
         return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_POST_SERVICEDOCS, requestUrl,
                 BuildReqParameter.paramsPostServices(documentName, documentType, issuedBy, description, vendorId, urls));
+    }
+
+    public boolean getAllCountries(String requestUrl) {
+        return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_GET_COUNTRIES, requestUrl, BuildReqParameter.getmethodrequest("GET"));
+    }
+
+    public boolean getAllStates(String requestUrl) {
+        return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_GET_STATES, requestUrl, BuildReqParameter.getmethodrequest("GET"));
+    }
+
+    public boolean getAllCities(String url) {
+        return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_GET_CITIES, url, BuildReqParameter.getmethodrequest("GET"));
+    }
+
+    public boolean updateVendorForm(String requestUrl, VendorReqDomain vendorEnquaryDomain) {
+        return new BaseWA(this, mContext).startDataDownload(ServiceMethods.WS_APP_UPDATE_VENDORFORM, requestUrl,
+                gson.toJson(vendorEnquaryDomain)
+        );
     }
 }
 

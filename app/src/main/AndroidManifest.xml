@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".Application.CustomApplication"
         android:allowBackup="true"
@@ -33,7 +32,9 @@
         <activity
             android:name=".activity.DashBoardActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".activity.BillsActivity" />
+        <activity
+            android:name=".activity.BillsActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <service
             android:name=".services.AccessTokenService"
@@ -41,7 +42,18 @@
             android:exported="true"
             android:stopWithTask="true" />
 
-        <activity android:name=".activity.ListActivity" />
+        <activity
+            android:name=".activity.ListActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.VendorFormActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.BillSubmitFormActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.LeaveApplyFormActivity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

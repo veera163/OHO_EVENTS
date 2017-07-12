@@ -49,7 +49,9 @@ import ohopro.com.ohopro.adapter.StringListAdapter;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.utility.AppConstant;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.LoggerUtils;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
@@ -283,8 +285,12 @@ public class UploadServiceDocumentFragment extends Fragment
     public void dataRetreived(Response data) {
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_POST_SERVICEDOCS)) {
             if (!data.isError) {
+                if (data.data instanceof ErrorDomain)
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                else
+                    alertDialog.dismiss();
+
                 customProgressLoader.dismissProgressDialog();
-                alertDialog.dismiss();
             }
         }
     }

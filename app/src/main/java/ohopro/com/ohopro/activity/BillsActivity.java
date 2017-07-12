@@ -46,7 +46,10 @@ import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
 import ohopro.com.ohopro.domains.BillDomain;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.fragments.ListOfBillsFragment;
+import ohopro.com.ohopro.utility.AppConstant;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
 import ohopro.com.ohopro.webaccess.ServiceMethods;
@@ -70,8 +73,6 @@ public class BillsActivity extends AppCompatActivity
     ImageView img_back;
     Dialog dialog;
     private Dialog chooseImage;
-
-
 
 
     private final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1;
@@ -168,9 +169,19 @@ public class BillsActivity extends AppCompatActivity
     @Override
     public void onBillSelected(BillDomain billDomain) {
         if (billDomain.getStatus().equalsIgnoreCase("PENDING"))
-            openBillEditDialog(billDomain);
+            //openBillEditDialog(billDomain);
+            openEditBillActivity(billDomain);
         else
             Toast.makeText(this, "your Bill Approved", Toast.LENGTH_SHORT).show();
+    }
+
+    private void openEditBillActivity(BillDomain billDomain) {
+        Intent intent = new Intent(context, BillSubmitFormActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(AppConstant.ACTION, AppConstant.EDIT);
+        bundle.putParcelable(AppConstant.DATAOBJECT, billDomain);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     TextView edt_dates;
@@ -400,11 +411,16 @@ public class BillsActivity extends AppCompatActivity
     public void dataRetreived(Response data) {
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_UPDATEBILL)) {
             if (!data.isError) {
-                int status = (int) data.data;
-                if (status == 200) {
-                    dialog.dismiss();
-                    progressDialog.dismissProgressDialog();
+                if (data.data instanceof Integer) {
+                    int status = (int) data.data;
+                    if (status == 200) {
+                        dialog.dismiss();
+                        progressDialog.dismissProgressDialog();
+                    }
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
+
             }
         }
 

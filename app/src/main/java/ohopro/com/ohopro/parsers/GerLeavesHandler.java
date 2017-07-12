@@ -33,7 +33,6 @@ public class GerLeavesHandler extends BaseHandler {
             leaveResponses = gson.fromJson(new JsonParser().parse(response).getAsJsonArray(), new TypeToken<ArrayList<LeaveResponse>>() {
             }.getType());
         } catch (JSONException e) {
-
             errorDomain = gson.fromJson(response, ErrorDomain.class);
             errorMessage = AppConstant.ERROR;
             e.printStackTrace();
@@ -50,6 +49,6 @@ public class GerLeavesHandler extends BaseHandler {
 
     @Override
     public String getErrorData() {
-        return errorMessage;
+        return AppConstant.OK_RESPONSE;
     }
 }

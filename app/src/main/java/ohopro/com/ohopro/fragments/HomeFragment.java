@@ -2,6 +2,7 @@ package ohopro.com.ohopro.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,15 +28,20 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import ohopro.com.ohopro.R;
+import ohopro.com.ohopro.activity.BillSubmitFormActivity;
 import ohopro.com.ohopro.activity.DashBoardActivity;
+import ohopro.com.ohopro.activity.LeaveApplyFormActivity;
+import ohopro.com.ohopro.activity.VendorFormActivity;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
 import ohopro.com.ohopro.domains.DashBoardStatesDomain;
+import ohopro.com.ohopro.domains.ErrorDomain;
 import ohopro.com.ohopro.domains.LeaveBalanceDomain;
 import ohopro.com.ohopro.domains.WalletDomain;
 import ohopro.com.ohopro.services.AccessTokenService;
 import ohopro.com.ohopro.utility.AppConstant;
+import ohopro.com.ohopro.utility.CustomAlertDialogSimple;
 import ohopro.com.ohopro.utility.PreferenceUtils;
 import ohopro.com.ohopro.views.CustomProgressLoader;
 import ohopro.com.ohopro.webaccess.Response;
@@ -127,26 +133,27 @@ public class HomeFragment extends Fragment
         ll_submit_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
+                /*getFragmentManager().beginTransaction()
                         .replace(R.id.ll_fragment, NewBillFragment.newInstance())
-                        .commit();
+                        .commit();*/
+                gotoBillSubmitFormActvity();
             }
         });
 
         ll_vendorform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.ll_fragment, VendorEnqFormFragment.newInstance())
-                        .commit();
+
+                gotoVendorEnqActivity();
             }
         });
         ll_apply_leave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction()
+                /*getFragmentManager().beginTransaction()
                         .replace(R.id.ll_fragment, RequestLeaveFragment.newInstance())
-                        .commit();
+                        .commit();*/
+                gotoLeaveRequestFragment();
             }
         });
 
@@ -205,7 +212,7 @@ public class HomeFragment extends Fragment
         ll_vendordetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((DashBoardActivity) getActivity()).gotoAllVendorReqs(AppConstant.VENDORIN_PROGRSS);
+                ((DashBoardActivity) getActivity()).gotoAllVendorReqs(AppConstant.VENDORENQUIRED);
             }
         });
         ll_req_advance.setOnClickListener(new View.OnClickListener() {
@@ -269,6 +276,21 @@ public class HomeFragment extends Fragment
         // entry label styling
         pie_chart.setEntryLabelColor(Color.WHITE);
         pie_chart.setEntryLabelTextSize(12f);
+    }
+
+    private void gotoLeaveRequestFragment() {
+        Intent intent = new Intent(getContext(), LeaveApplyFormActivity.class);
+        startActivity(intent);
+    }
+
+    private void gotoBillSubmitFormActvity() {
+        Intent intent = new Intent(getContext(), BillSubmitFormActivity.class);
+        startActivity(intent);
+    }
+
+    private void gotoVendorEnqActivity() {
+        Intent intent = new Intent(getContext(), VendorFormActivity.class);
+        startActivity(intent);
     }
 
     private void getWalletBalance() {
@@ -432,20 +454,32 @@ public class HomeFragment extends Fragment
         if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_GET_LEAVE_BALANCE)) {
             if (!data.isError) {
                 customProgressLoader.dismissProgressDialog();
-                openDialogforLeaveBalance((LeaveBalanceDomain) data.data);
+                if (data.data instanceof LeaveBalanceDomain)
+                    openDialogforLeaveBalance((LeaveBalanceDomain) data.data);
+                else if (data.data instanceof ErrorDomain)
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_GET_WALLET_BAL)) {
             if (!data.isError) {
                 customProgressLoader.dismissProgressDialog();
+                if (data.data instanceof WalletDomain) {
+                    WalletDomain walletDomain = (WalletDomain) data.data;
+                    openDialogtoDisplayAmount(walletDomain);
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
 
-                WalletDomain walletDomain = (WalletDomain) data.data;
-                openDialogtoDisplayAmount(walletDomain);
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_DASHBOARDSTATE)) {
             if (!data.isError) {
-                AppConstant.dashBoardStatesDomain = (DashBoardStatesDomain) data.data;
-                customProgressLoader.dismissProgressDialog();
-                setData("Products");
+                if (data.data instanceof DashBoardStatesDomain) {
+                    AppConstant.dashBoardStatesDomain = (DashBoardStatesDomain) data.data;
+                    customProgressLoader.dismissProgressDialog();
+                    setData("Products");
+                } else if (data.data instanceof ErrorDomain) {
+                    new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
+                }
+
             }
         }
     }

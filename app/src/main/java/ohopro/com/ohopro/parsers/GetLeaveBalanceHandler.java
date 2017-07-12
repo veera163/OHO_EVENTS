@@ -29,8 +29,6 @@ public class GetLeaveBalanceHandler extends BaseHandler {
             if (jsonObject.has("error")) {
                 errorDomain = gson.fromJson(response, ErrorDomain.class);
                 errorMessage = AppConstant.ERROR;
-
-
             } else {
                 leaveBalanceDomain = gson.fromJson(response, LeaveBalanceDomain.class);
                 errorMessage = AppConstant.OK_RESPONSE;
