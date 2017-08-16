@@ -160,12 +160,12 @@ public class LoginActivity extends AppCompatActivity
             }
         } else if (data.servicemethod.equalsIgnoreCase(ServiceMethods.WS_APP_GET_USERDET)) {
             customProgressLoader.dismissProgressDialog();
-
             if (!data.isError) {
                 if (data.data instanceof UserDomain) {
                     UserDomain userDetDomain = (UserDomain) data.data;
                     preferenceUtils.saveUserDetails(userDetDomain);
                     preferenceUtils.setUserState(true);
+                    preferenceUtils.setUserResponseJson(userDetDomain.getRespInJson());
                     gotoDashBoardActivity();
                 } else if (data.data instanceof ErrorDomain) {
                     new CustomAlertDialogSimple(context).showAlertDialog(((ErrorDomain) data.data).getError_description());

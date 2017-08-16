@@ -32,6 +32,7 @@ import ohopro.com.ohopro.activity.BillSubmitFormActivity;
 import ohopro.com.ohopro.activity.DashBoardActivity;
 import ohopro.com.ohopro.activity.LeaveApplyFormActivity;
 import ohopro.com.ohopro.activity.VendorFormActivity;
+import ohopro.com.ohopro.activity.WebViewActivity;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
@@ -63,7 +64,7 @@ public class HomeFragment extends Fragment
     PreferenceUtils preferenceUtils;
     CustomProgressLoader customProgressLoader;
     LinearLayout ll_submit_bill, ll_apply_leave, ll_approved_bills;
-    LinearLayout ll_my_bills, ll_pending_bills, ll_all_leave_reqs;
+    LinearLayout ll_my_bills, ll_pending_bills, ll_all_leave_reqs, ll_products;
     LinearLayout ll_leaves_left, ll_all_leaves, ll_approveleave, ll_check_wallet_balance;
     LinearLayout ll_add_money, ll_req_advance, ll_approve_advance, ll_vendorform, ll_vendordetails;
     TextView tv_name, tv_money;
@@ -119,6 +120,7 @@ public class HomeFragment extends Fragment
         ll_all_leaves = (LinearLayout) view.findViewById(R.id.ll_all_leaves);
         ll_approveleave = (LinearLayout) view.findViewById(R.id.ll_approveleave);
         ll_check_wallet_balance = (LinearLayout) view.findViewById(R.id.ll_check_wallet_balance);
+        ll_products = (LinearLayout) view.findViewById(R.id.ll_products);
         ll_add_money = (LinearLayout) view.findViewById(R.id.ll_add_money);
         ll_req_advance = (LinearLayout) view.findViewById(R.id.ll_req_advance);
         ll_approve_advance = (LinearLayout) view.findViewById(R.id.ll_approve_advance);
@@ -130,6 +132,12 @@ public class HomeFragment extends Fragment
         tv_name = (TextView) view.findViewById(R.id.tv_name);
         tv_name.setText(preferenceUtils.getUserName());
         adjustUiBasedOnRole();
+        ll_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoProductCreation();
+            }
+        });
         ll_submit_bill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,6 +284,11 @@ public class HomeFragment extends Fragment
         // entry label styling
         pie_chart.setEntryLabelColor(Color.WHITE);
         pie_chart.setEntryLabelTextSize(12f);
+    }
+
+    private void gotoProductCreation() {
+        Intent intent = new Intent(getContext(), WebViewActivity.class);
+        startActivity(intent);
     }
 
     private void gotoLeaveRequestFragment() {

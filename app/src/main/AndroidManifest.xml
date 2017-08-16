@@ -54,6 +54,7 @@
         <activity
             android:name=".activity.LeaveApplyFormActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.WebViewActivity"></activity>
     </application>
 
 </manifest>

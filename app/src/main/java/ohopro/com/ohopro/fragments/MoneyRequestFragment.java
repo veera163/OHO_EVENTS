@@ -70,7 +70,6 @@ public class MoneyRequestFragment extends Fragment
         final Drawable upArrow = ContextCompat.getDrawable(getContext(), R.drawable.abc_ic_ab_back_material);
         upArrow.setColorFilter(ContextCompat.getColor(getContext(), R.color.gray), PorterDuff.Mode.SRC_ATOP);
         btn_back.setCompoundDrawablesWithIntrinsicBounds(upArrow, null, null, null);
-
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

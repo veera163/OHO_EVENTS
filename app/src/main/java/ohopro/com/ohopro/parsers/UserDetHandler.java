@@ -19,7 +19,6 @@ public class UserDetHandler extends BaseHandler {
     ErrorDomain errorDomain;
 
     public UserDetHandler(String response) {
-
         getDataFromResponse(response);
     }
 
@@ -29,6 +28,7 @@ public class UserDetHandler extends BaseHandler {
             if (jsonObject.has("type")) {
                 errorMessage = AppConstant.OK_RESPONSE;
                 userDetDomain = gson.fromJson(response, UserDomain.class);
+                userDetDomain.setRespInJson(response);
             } else {
                 errorMessage = AppConstant.ERROR;
                 errorDomain = gson.fromJson(response, ErrorDomain.class);

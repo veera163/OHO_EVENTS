@@ -69,6 +69,30 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/ll_products"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:gravity="center"
+                    android:text="Create Product"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/smalltextsize" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_submit_bill"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"

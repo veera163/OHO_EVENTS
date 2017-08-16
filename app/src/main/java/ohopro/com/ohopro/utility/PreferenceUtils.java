@@ -32,6 +32,7 @@ public class PreferenceUtils {
     private String KEY_CUSTOMER_TYPE = "customerType";
     private String NEWSESSION = "newsession";
     private String KEY_CUSTOMER_ID = "customerID";
+    private String RESPONSEINJSON = "responseinJson";
 
     public long getExpiresIn() {
         return preferences.getLong(KEY_EXPIRESIN, 0);
@@ -140,4 +141,14 @@ public class PreferenceUtils {
         //edit.putBoolean(KEY_IS_LOGIN, true);
         edit.commit();
     }
+
+    public void setUserResponseJson(String respInJson) {
+        edit.putString(RESPONSEINJSON, respInJson);
+        edit.commit();
+    }
+
+    public String getUserResponseJson() {
+        return preferences.getString(RESPONSEINJSON, "NA");
+    }
+
 }
