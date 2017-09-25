@@ -1,0 +1,17 @@
+<html>
+<body onLoad='a()'>
+<h1>Demo12 on webview </h1>
+<script> function a(){
+                Android.showToast(localStorage.getItem("ls.userInfo"));
+                Android.showToast('in script');
+                localStorage.name = 'This is initial value stored in local storage '
+                Android.showToast(localStorage.name);;
+                localStorage.setItem("ls.userInfo",Android.getValue());
+                localStorage.name = 'this is updated value in local storage ';
+                Android.showToast(localStorage.getItem("ls.userInfo"));
+                Android.onFinish();
+               }
+</script>
+
+</body>
+</html>
