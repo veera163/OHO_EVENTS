@@ -142,6 +142,15 @@ public class PreferenceUtils {
         edit.commit();
     }
 
+    public void saveRawAccessTokenRefreshToken(String s) {
+        edit.putString("rawauthdata", s);
+        edit.commit();
+    }
+
+    public String getRawAccessTokenRefreshToken() {
+        return preferences.getString("rawauthdata", "NA");
+    }
+
     public void setUserResponseJson(String respInJson) {
         edit.putString(RESPONSEINJSON, respInJson);
         edit.commit();

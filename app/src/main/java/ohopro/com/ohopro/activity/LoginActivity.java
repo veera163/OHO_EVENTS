@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.regex.Pattern;
 
 import ohopro.com.ohopro.R;
@@ -146,9 +148,12 @@ public class LoginActivity extends AppCompatActivity
                 customProgressLoader.dismissProgressDialog();
                 if (data.data instanceof AuthenticationDomain) {
                     AuthenticationDomain authenticationDomain = (AuthenticationDomain) data.data;
+                    String authDataString = new Gson().toJson(authenticationDomain);
+
                     preferenceUtils.saveAccessTokenRefreshToken(authenticationDomain.getAccess_token(),
                             authenticationDomain.getRefresh_token(),
                             authenticationDomain.getExpires_in());
+                    preferenceUtils.saveRawAccessTokenRefreshToken(authDataString);
                     getUserDetails();
                     //gotoDashBoardActivity();
                 } else if (data.data instanceof ErrorDomain) {

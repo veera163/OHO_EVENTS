@@ -14,7 +14,7 @@ import ohopro.com.ohopro.utility.WebAppInterface;
 public class WebViewActivity extends AppCompatActivity {
     WebView webView;
     PreferenceUtils preferenceUtils;
-    String url = "http://www.myeventorganiser.in/#/dashboard/products";
+    String url = "http://192.168.0.102:9000/#/dashboard/items";
 
     @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface", "AddJavascriptInterface"})
     @Override
@@ -30,7 +30,7 @@ public class WebViewActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webView.addJavascriptInterface(new WebAppInterface(this), "Android");
 
-        //webView.getSettings().setDatabasePath("/data/data/databases/");
+        webView.getSettings().setDatabasePath("/data/data/databases/");
         webView.loadUrl("file:///android_asset/sq1.html");
     }
 

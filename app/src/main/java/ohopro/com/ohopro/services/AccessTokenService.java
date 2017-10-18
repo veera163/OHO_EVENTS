@@ -87,8 +87,10 @@ public class AccessTokenService extends Service {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.has("access_token")) {
+                    preferenceUtils.saveRawAccessTokenRefreshToken(s);
                     RefreshTokenDomain refreshTokenDomain = new Gson().fromJson(s, RefreshTokenDomain.class);
                     preferenceUtils.saveAccessTokenRefreshToken(refreshTokenDomain);
+
                     AppConstant.accessUpdated = true;
                     if (AppConstant.updated != null)
                         AppConstant.updated.isUpdated();

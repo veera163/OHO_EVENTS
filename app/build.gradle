@@ -13,7 +13,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "ohopro.com.ohopro"
-        minSdkVersion 12
+        minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -46,5 +46,6 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton.timber:timber:4.1.2'
     testCompile 'junit:junit:4.12'
 }

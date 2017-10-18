@@ -31,6 +31,7 @@ import ohopro.com.ohopro.R;
 import ohopro.com.ohopro.activity.BillSubmitFormActivity;
 import ohopro.com.ohopro.activity.DashBoardActivity;
 import ohopro.com.ohopro.activity.LeaveApplyFormActivity;
+import ohopro.com.ohopro.activity.ProductModuleActivity;
 import ohopro.com.ohopro.activity.VendorFormActivity;
 import ohopro.com.ohopro.activity.WebViewActivity;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
@@ -287,7 +288,7 @@ public class HomeFragment extends Fragment
     }
 
     private void gotoProductCreation() {
-        Intent intent = new Intent(getContext(), WebViewActivity.class);
+        Intent intent = new Intent(getContext(), ProductModuleActivity.class);
         startActivity(intent);
     }
 
