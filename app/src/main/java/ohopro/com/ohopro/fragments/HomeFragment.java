@@ -385,10 +385,8 @@ public class HomeFragment extends Fragment
             ll_approve_advance.setVisibility(View.GONE);
             ll_vendorform.setVisibility(View.GONE);
             ll_vendordetails.setVisibility(View.GONE);
-            if (AppConstant.accessUpdated)
-                getDashBoardStates();
-
-
+            //if (AppConstant.accessUpdated)
+            getDashBoardStates();
         }
     }
 

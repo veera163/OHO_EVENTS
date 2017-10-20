@@ -283,13 +283,13 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     private void gotoLoginScreen() {
-        Intent intent = new Intent(this, SignOutActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
 
-        /*Intent service = new Intent(this, AccessTokenService.class);
+        Intent service = new Intent(this, AccessTokenService.class);
         stopService(service);
-        preferenceUtils.doLogout();*/
+        preferenceUtils.doLogout();
     }
 
     @Override
