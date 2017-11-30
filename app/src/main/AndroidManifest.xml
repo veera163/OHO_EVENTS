@@ -56,7 +56,8 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.ProductModuleActivity" />
-        <activity android:name=".activity.SignOutActivity"></activity>
+        <activity android:name=".activity.SignOutActivity" />
+        <activity android:name=".activity.VendorOrdersActivity"></activity>
     </application>
 
 </manifest>

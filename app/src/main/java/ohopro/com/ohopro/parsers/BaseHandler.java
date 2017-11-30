@@ -84,6 +84,10 @@ public abstract class BaseHandler extends DefaultHandler {
                 return new NamesGetterHandler(response);
             case ServiceMethods.WS_APP_GET_CITIES:
                 return new NamesGetterHandler(response);
+            case ServiceMethods.WS_APP_VENDOR_COMPLETED_ORDERS:
+                return new OrdersHandler(response);
+            case ServiceMethods.WS_APP_VENDOR_ONGOING_ORDERS:
+                return new OrdersHandler(response);
         }
         return null;
     }

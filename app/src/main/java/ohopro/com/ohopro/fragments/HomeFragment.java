@@ -33,7 +33,6 @@ import ohopro.com.ohopro.activity.DashBoardActivity;
 import ohopro.com.ohopro.activity.LeaveApplyFormActivity;
 import ohopro.com.ohopro.activity.ProductModuleActivity;
 import ohopro.com.ohopro.activity.VendorFormActivity;
-import ohopro.com.ohopro.activity.WebViewActivity;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
 import ohopro.com.ohopro.busnesslayer.DataListener;
@@ -69,7 +68,7 @@ public class HomeFragment extends Fragment
     LinearLayout ll_leaves_left, ll_all_leaves, ll_approveleave, ll_check_wallet_balance;
     LinearLayout ll_add_money, ll_req_advance, ll_approve_advance, ll_vendorform, ll_vendordetails;
     TextView tv_name, tv_money;
-    PieChart pie_chart;
+    PieChart pie_chart, pie_chart_orders;
     private String[] tags = {"Completed", "Pending"};
 
     public HomeFragment() {
@@ -126,6 +125,7 @@ public class HomeFragment extends Fragment
         ll_req_advance = (LinearLayout) view.findViewById(R.id.ll_req_advance);
         ll_approve_advance = (LinearLayout) view.findViewById(R.id.ll_approve_advance);
         pie_chart = (PieChart) view.findViewById(R.id.pie_chart);
+        pie_chart_orders = (PieChart) view.findViewById(R.id.pie_chart_orders);
         ll_apply_leave = (LinearLayout) view.findViewById(R.id.ll_apply_leave);
         ll_approved_bills = (LinearLayout) view.findViewById(R.id.ll_approved_bills);
         ll_submit_bill = (LinearLayout) view.findViewById(R.id.ll_submit_bill);
@@ -244,6 +244,12 @@ public class HomeFragment extends Fragment
                 getLeaveBalance();
             }
         });
+        setPieChart(pie_chart);
+        setPieChart(pie_chart_orders);
+
+    }
+
+    private void setPieChart(PieChart pie_chart) {
         pie_chart.setUsePercentValues(true);
         pie_chart.getDescription().setEnabled(false);
         pie_chart.setExtraOffsets(5, 10, 5, 5);
@@ -284,7 +290,8 @@ public class HomeFragment extends Fragment
 
         // entry label styling
         pie_chart.setEntryLabelColor(Color.WHITE);
-        pie_chart.setEntryLabelTextSize(12f);
+        pie_chart.setEntryLabelTextSize(8f);
+
     }
 
     private void gotoProductCreation() {
@@ -403,7 +410,7 @@ public class HomeFragment extends Fragment
         return stringBuilder.toString();
     }
 
-    private void setData(String s) {
+    private void setData(String s, PieChart pie_chart) {
         ArrayList<PieEntry> entries = new ArrayList<>();
         PieDataSet dataSet = null;
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
@@ -418,6 +425,12 @@ public class HomeFragment extends Fragment
             for (int i = 0; i < AppConstant.dashBoardStatesDomain.getProductComboChartData().getData().size(); i++) {
                 entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getProductComboChartData().getData().get(i)),
                         AppConstant.dashBoardStatesDomain.getProductComboChartData().getLabels().get(i)));
+            }
+            dataSet = new PieDataSet(entries, s);
+        } else if (s.equalsIgnoreCase("Orders")) {
+            for (int i = 0; i < AppConstant.dashBoardStatesDomain.getOrderChartData().getData().size(); i++) {
+                entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getOrderChartData().getData().get(i)),
+                        AppConstant.dashBoardStatesDomain.getOrderChartData().getLabels().get(i)));
             }
             dataSet = new PieDataSet(entries, s);
         }
@@ -487,7 +500,9 @@ public class HomeFragment extends Fragment
                 if (data.data instanceof DashBoardStatesDomain) {
                     AppConstant.dashBoardStatesDomain = (DashBoardStatesDomain) data.data;
                     customProgressLoader.dismissProgressDialog();
-                    setData("Products");
+                    setData("Products", pie_chart);
+                    setData("Orders", pie_chart_orders);
+
                 } else if (data.data instanceof ErrorDomain) {
                     new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());
                 }
@@ -559,7 +574,7 @@ public class HomeFragment extends Fragment
 
     public void updatePieChart(String s) {
 
-        setData(s);
+        setData(s, pie_chart);
 
     }
 }

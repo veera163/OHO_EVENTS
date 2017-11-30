@@ -37,6 +37,8 @@ public class ServiceURL {
     private static String COUNTRIES = "/location/countries";
     private static String STATES = "location/states/";
     private static String CITIES = "location/cities/";
+    private static String VENDORONGOINGORDER = "/order/vendorOngoingOrders/";
+    private static String VENDORCMPLTDORDER = "/order/vendorCompletedOrders/";
 
     public static int getRequestTypemethod(String methodname) {
         switch (methodname) {
@@ -104,6 +106,10 @@ public class ServiceURL {
                 return AppConstant.REQ_GET;
             case ServiceMethods.WS_APP_UPDATE_VENDORFORM:
                 return AppConstant.REQ_PUT;
+            case ServiceMethods.WS_APP_VENDOR_ONGOING_ORDERS:
+                return AppConstant.REQ_GET;
+            case ServiceMethods.WS_APP_VENDOR_COMPLETED_ORDERS:
+                return AppConstant.REQ_GET;
         }
         return 0;
 
@@ -167,6 +173,10 @@ public class ServiceURL {
                 return HOST_URL + STATES;
             case ServiceMethods.WS_APP_GET_CITIES:
                 return HOST_URL + CITIES;
+            case ServiceMethods.WS_APP_VENDOR_ONGOING_ORDERS:
+                return HOST_URL + VENDORONGOINGORDER;
+            case ServiceMethods.WS_APP_VENDOR_COMPLETED_ORDERS:
+                return HOST_URL + VENDORCMPLTDORDER;
         }
         return "NA";
     }

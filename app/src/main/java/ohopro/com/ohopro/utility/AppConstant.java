@@ -11,6 +11,8 @@ import ohopro.com.ohopro.services.AccessTokenService;
  */
 public class AppConstant {
 
+    public static final String VENDORONGOINGORDER = "On going";
+    public static final String VENDORCMPLTORDER = "Completed";
     public static final String ACCESSTOKEINFO = "?access_token=";
     //public static final String ROLEMANAGER = "ROLE_MANAGER";
     public static final String ROLEMANAGER = "ROLE_MANAGER";
@@ -29,7 +31,7 @@ public class AppConstant {
     public static final int REQ_PUT = 3;
     public static final String GETVENDORREQS = "seeallvendors";
     public static final String VENDORIN_PROGRSS = "IN_PROGRESS";
-    public static final String VENDORENQUIRED  = "ENQUIRED ";
+    public static final String VENDORENQUIRED = "ENQUIRED ";
     public static final String ROLEVENDOR = "V";
     public static final String EDIT = "edit";
     public static String CHECK_NETWORK_CONN = "Please Check your Connetion";
@@ -56,6 +58,6 @@ public class AppConstant {
     public static boolean accessUpdated = false;
     public static AccessTokenService.Updated updated;
     public static String ERROR = "error";
-    public static String DATAOBJECT="dataObject";
+    public static String DATAOBJECT = "dataObject";
     public static VendorReqDomain vendorReqDomain;
 }

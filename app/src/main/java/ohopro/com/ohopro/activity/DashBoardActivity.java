@@ -175,11 +175,13 @@ public class DashBoardActivity extends AppCompatActivity
     private void createDataForNavigation() {
         strings.add("Dash Board");
         strings.add("Products");
+        strings.add("Orders");
         strings.add("Food Menu Items");
         strings.add("Upload Service Document");
         strings.add("Upload Agreement Document");
         strings.add("Product Availability");
         strings.add("Product Combo");
+
     }
 
     private void getDashBoardStates() {
@@ -398,6 +400,13 @@ public class DashBoardActivity extends AppCompatActivity
             fragmentTransaction.beginTransaction()
                     .replace(R.id.ll_fragment, fragment, UPLOADAGREEMENT)
                     .commit();
+        } else if (s.equalsIgnoreCase("Orders")) {
+            gotoVendorOrderMgmnt();
         }
+    }
+
+    private void gotoVendorOrderMgmnt() {
+        Intent intent = new Intent(this, VendorOrdersActivity.class);
+        startActivity(intent);
     }
 }

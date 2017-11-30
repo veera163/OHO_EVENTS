@@ -210,5 +210,9 @@ public class CommonBL extends BaseBL {
                 gson.toJson(vendorEnquaryDomain)
         );
     }
+
+    public boolean getAllOrder(String method, String url) {
+        return new BaseWA(this, mContext).startDataDownload(method, url, BuildReqParameter.getmethodrequest("GET"));
+    }
 }
 

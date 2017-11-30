@@ -35,6 +35,8 @@ public interface ServiceMethods {
     String WS_APP_POST_SERVICEDOCS = "uploadservicedocs";
     String WS_APP_GET_COUNTRIES = "getCountries";
     String WS_APP_GET_STATES = "getStates";
-    String WS_APP_GET_CITIES= "getCities";
+    String WS_APP_GET_CITIES = "getCities";
     String WS_APP_UPDATE_VENDORFORM = "updateVendorForm";
+    String WS_APP_VENDOR_ONGOING_ORDERS = "WS_APP_VENDOR_ONGOING_ORDERS";
+    String WS_APP_VENDOR_COMPLETED_ORDERS = "WS_APP_VENDOR_COMPLETED_ORDERS";
 }
