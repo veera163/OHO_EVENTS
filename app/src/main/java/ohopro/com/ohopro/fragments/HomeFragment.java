@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -250,16 +251,14 @@ public class HomeFragment extends Fragment
     }
 
     private void setPieChart(PieChart pie_chart) {
-        pie_chart.setUsePercentValues(true);
+       // pie_chart.setUsePercentValues(true);
         pie_chart.getDescription().setEnabled(false);
-        pie_chart.setExtraOffsets(5, 10, 5, 5);
+        pie_chart.setExtraOffsets(5, 5, 35, 5);
         pie_chart.setDragDecelerationFrictionCoef(0.95f);
         pie_chart.setDrawHoleEnabled(false);
         pie_chart.setTransparentCircleColor(Color.WHITE);
         pie_chart.setTransparentCircleAlpha(110);
-
         pie_chart.setTransparentCircleRadius(61f);
-
         pie_chart.setDrawCenterText(true);
 
         pie_chart.setRotationAngle(0);
@@ -417,31 +416,39 @@ public class HomeFragment extends Fragment
         // the chart.
         if (s.equalsIgnoreCase("Products")) {
             for (int i = 0; i < AppConstant.dashBoardStatesDomain.getProductChartData().getData().size(); i++) {
-                entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getProductChartData().getData().get(i)),
-                        AppConstant.dashBoardStatesDomain.getProductChartData().getLabels().get(i)));
+                String order=AppConstant.dashBoardStatesDomain.getProductChartData().getLabels().get(i);
+                order = order.replace("_", " ");
+                entries.add(new PieEntry(Float.parseFloat((AppConstant.dashBoardStatesDomain.getProductChartData().getData().get(i))), order));
             }
             dataSet = new PieDataSet(entries, s);
         } else if (s.equalsIgnoreCase("Product Combo")) {
             for (int i = 0; i < AppConstant.dashBoardStatesDomain.getProductComboChartData().getData().size(); i++) {
+
                 entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getProductComboChartData().getData().get(i)),
                         AppConstant.dashBoardStatesDomain.getProductComboChartData().getLabels().get(i)));
             }
             dataSet = new PieDataSet(entries, s);
+
         } else if (s.equalsIgnoreCase("Orders")) {
             for (int i = 0; i < AppConstant.dashBoardStatesDomain.getOrderChartData().getData().size(); i++) {
-                entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getOrderChartData().getData().get(i)),
-                        AppConstant.dashBoardStatesDomain.getOrderChartData().getLabels().get(i)));
+                String order=AppConstant.dashBoardStatesDomain.getOrderChartData().getLabels().get(i);
+                order = order.replace("_", " ");
+                entries.add(new PieEntry(Float.parseFloat(AppConstant.dashBoardStatesDomain.getOrderChartData().getData().get(i)), order));
+
             }
             dataSet = new PieDataSet(entries, s);
+            Log.e("veera",entries.toString());
+
         }
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
 
         // add a lot of colors
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
+       // data.getDataSet();
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
@@ -466,6 +473,7 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
+    //  Log.e("veera",e.toString());
 
     }
 
@@ -502,6 +510,7 @@ public class HomeFragment extends Fragment
                     customProgressLoader.dismissProgressDialog();
                     setData("Products", pie_chart);
                     setData("Orders", pie_chart_orders);
+
 
                 } else if (data.data instanceof ErrorDomain) {
                     new CustomAlertDialogSimple(getContext()).showAlertDialog(((ErrorDomain) data.data).getError_description());

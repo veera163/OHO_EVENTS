@@ -250,7 +250,6 @@
                     android:layout_margin="7dp"
                     android:layout_weight="1"
                     android:background="@drawable/edt_border"
-                    android:enabled="true"
                     android:hint="Address line 2"
                     android:imeOptions="actionNext"
                     android:inputType="text"

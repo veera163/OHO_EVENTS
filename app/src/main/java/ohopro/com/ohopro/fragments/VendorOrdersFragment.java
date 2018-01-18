@@ -1,19 +1,25 @@
 package ohopro.com.ohopro.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ohopro.com.ohopro.R;
 import ohopro.com.ohopro.activity.VendorOrdersActivity;
+import ohopro.com.ohopro.activity.VendorProductAvailbility;
 import ohopro.com.ohopro.adapter.OrderAdapter;
 import ohopro.com.ohopro.appserviceurl.ServiceURL;
 import ohopro.com.ohopro.busnesslayer.CommonBL;
@@ -31,12 +37,12 @@ import ohopro.com.ohopro.webaccess.ServiceMethods;
  * Created by sai on 19-11-2017.
  */
 
-public class VendorOrdersFragment extends Fragment
-        implements VendorOrdersActivity.OrdersUpdate, DataListener {
+public class VendorOrdersFragment extends Fragment implements VendorOrdersActivity.OrdersUpdate, DataListener {
     private static String TYPE = "type";
     private String type;
     private PreferenceUtils preferenceUtils;
     private CustomProgressLoader customProgressLoader;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     ArrayList<OrderDomain> orderDomains;
     OrderAdapter orderAdapter;
@@ -73,6 +79,23 @@ public class VendorOrdersFragment extends Fragment
 
     private void initViewController(View view) {
         tv_notifications = (TextView) view.findViewById(R.id.tv_notifications);
+
+      /*  mSwipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.hcontainer);
+        mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW);
+        mSwipeRefreshLayout.setOnRefreshListener(new    SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getContext(), "Refresh", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getOnGoingOrders();
+                        getCompletedOrders();
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 2000);
+            }
+        });*/
         rlst_bills = (RecyclerView) view.findViewById(R.id.rlst_bills);
         rlst_bills.setLayoutManager(new LinearLayoutManager(getContext()));
         rlst_bills.setAdapter(orderAdapter);
@@ -96,6 +119,7 @@ public class VendorOrdersFragment extends Fragment
     @Override
     public void update() {
         if (type.equalsIgnoreCase(AppConstant.VENDORONGOINGORDER))
+
             getOnGoingOrders();
         else
             getCompletedOrders();
@@ -112,6 +136,7 @@ public class VendorOrdersFragment extends Fragment
     private void getOnGoingOrders() {
         String url = ServiceURL.getRequestUrl(ServiceMethods.WS_APP_VENDOR_ONGOING_ORDERS);
         url = url.concat(preferenceUtils.getUserId());
+        Log.e("url",url);
         if (new CommonBL(this, getContext()).getAllOrder(ServiceMethods.WS_APP_VENDOR_ONGOING_ORDERS, url)) {
             customProgressLoader.showProgressDialog();
         }
@@ -120,6 +145,7 @@ public class VendorOrdersFragment extends Fragment
     private void getCompletedOrders() {
         String url = ServiceURL.getRequestUrl(ServiceMethods.WS_APP_VENDOR_COMPLETED_ORDERS);
         url = url.concat(preferenceUtils.getUserId());
+        Log.e("url",url);
         if (new CommonBL(this, getContext()).getAllOrder(ServiceMethods.WS_APP_VENDOR_COMPLETED_ORDERS, url)) {
             customProgressLoader.showProgressDialog();
         }

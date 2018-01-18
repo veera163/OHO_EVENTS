@@ -3,8 +3,16 @@
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="ohopro.com.ohopro.fragments.ListOfBillsFragment">
 
+  <!--  <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/hcontainer"
+        android:layout_marginTop="3dp"
+        android:layout_height="match_parent"/>-->
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rlst_bills"

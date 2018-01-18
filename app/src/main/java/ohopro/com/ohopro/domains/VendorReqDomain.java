@@ -16,7 +16,6 @@ public class VendorReqDomain {
     private String town;
     private String city;
     private String postalCode;
-    ;
     private String country;
     private String productOrServiceGroup;
     private String productOrServiceType;

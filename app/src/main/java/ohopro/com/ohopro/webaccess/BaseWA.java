@@ -38,6 +38,7 @@ public class BaseWA implements HttpListener {
         }*/
         REQURL = REQURL.replaceAll(" ", "%20");
         if (new ConnectionDetector(mContext).isConnectedToInternet()) {
+
             LoggerUtils.info(BaseWA.class.getSimpleName(), "starting download" + parameters);
 
             HTTPSimulator downloader = new HTTPSimulator(this, servicemethod, REQURL, parameters);
@@ -45,7 +46,8 @@ public class BaseWA implements HttpListener {
             downloader.start();
 
             return true;
-        } else {
+        }
+        else {
             showAlertDialog(mContext, "Internet Connetion", "Please check internet connection!!", false);
 
             return false;

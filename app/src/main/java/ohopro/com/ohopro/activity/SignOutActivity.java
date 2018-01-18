@@ -49,6 +49,7 @@ public class SignOutActivity extends AppCompatActivity {
             Toast.makeText(SignOutActivity.this, "clear ALl", Toast.LENGTH_SHORT).show();
             gotoLoginScreen();
         }
+
         @JavascriptInterface
         void showToast(String s) {
             Toast.makeText(SignOutActivity.this, s, Toast.LENGTH_SHORT).show();

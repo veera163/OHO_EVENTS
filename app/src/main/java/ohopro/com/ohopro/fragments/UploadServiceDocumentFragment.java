@@ -65,8 +65,8 @@ import ohopro.com.ohopro.webaccess.ServiceMethods;
  * Use the {@link UploadServiceDocumentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UploadServiceDocumentFragment extends Fragment
-        implements DataListener {
+public class UploadServiceDocumentFragment extends Fragment implements DataListener {
+
     private static final int REQUEST_EXTERNAL_STORAGE = 2;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,

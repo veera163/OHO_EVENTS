@@ -44,9 +44,8 @@ public class LoginActivity extends AppCompatActivity
     Toolbar toolbar;
     Button mEmailSignInButton;
     TextInputLayout ttl_email, ttl_password;
-
     CustomProgressLoader customProgressLoader;
-
+public  static String access;
     Context context;
 
     PreferenceUtils preferenceUtils;
@@ -149,6 +148,7 @@ public class LoginActivity extends AppCompatActivity
                 if (data.data instanceof AuthenticationDomain) {
                     AuthenticationDomain authenticationDomain = (AuthenticationDomain) data.data;
                     String authDataString = new Gson().toJson(authenticationDomain);
+                    access=String.valueOf(authenticationDomain.getAccess_token());
 
                     preferenceUtils.saveAccessTokenRefreshToken(authenticationDomain.getAccess_token(),
                             authenticationDomain.getRefresh_token(),

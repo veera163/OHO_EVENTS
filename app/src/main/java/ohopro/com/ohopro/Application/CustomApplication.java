@@ -18,6 +18,7 @@ import ohopro.com.ohopro.services.AccessTokenService;
 public class CustomApplication extends Application {
     @Override
     public void onCreate() {
+        super.onCreate();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .build();
         ImageLoader.getInstance().init(config);

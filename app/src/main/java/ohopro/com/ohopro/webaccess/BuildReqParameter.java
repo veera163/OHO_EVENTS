@@ -26,6 +26,7 @@ public class BuildReqParameter {
         JSONObject jsonObject = new JSONObject();
 
         try {
+
             jsonObject.put("phone", userMobile);
             jsonObject.put("emailId", userEmail);
             jsonObject.put("billNumber", billNumber);
@@ -35,6 +36,7 @@ public class BuildReqParameter {
             jsonObject.put("purpose; ", purpose);
             jsonObject.put("billImage", image);
             jsonObject.put("billImageName", "jpg");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -58,6 +60,7 @@ public class BuildReqParameter {
         JSONObject jsonObject = new JSONObject();
 
         try {
+
             jsonObject.put("employeeName", userName);
             jsonObject.put("phoneNumber", userMobile);
             jsonObject.put("emailId", userEmail);
@@ -66,6 +69,7 @@ public class BuildReqParameter {
             jsonObject.put("reason", reason);
             jsonObject.put("emergencyContact", emergencyContact);
             jsonObject.put("numberOfDays", numOfDays);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -73,6 +77,7 @@ public class BuildReqParameter {
     }
 
     public static String getParamsUpdateLeave(String leaveRequestId, String comment, String status) {
+
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -116,9 +121,11 @@ public class BuildReqParameter {
         JSONObject jsonObject = new JSONObject();
 
         try {
+
             jsonObject.put("comment", comment);
             jsonObject.put("status", status);
             jsonObject.put("billId", billId);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -147,6 +154,7 @@ public class BuildReqParameter {
             jsonObject.put("vendorId", userId);
             jsonObject.put("vendorName", userName);
             jsonObject.put("agreementDocUrl", imgeurl);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -163,13 +171,17 @@ public class BuildReqParameter {
             jsonObject.put("issuedBy", issuedBy);
             jsonObject.put("vendorId", vendorId);
             jsonObject.put("description", description);
+
             for (int i = 0; i < urls.size(); i++) {
+
                 JSONObject document = new JSONObject();
                 document.put("url", urls.get(i));
                 document.put("docName", "");
                 documents.put(document);
             }
+
             jsonObject.put("documents", documents);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -181,8 +193,10 @@ public class BuildReqParameter {
         JSONObject jsonObject = new JSONObject();
 
         try {
+
             jsonObject.put("productTypeGroup", serviceGroups);
             jsonObject.put("productOrServiceCategory", serviceTypes);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

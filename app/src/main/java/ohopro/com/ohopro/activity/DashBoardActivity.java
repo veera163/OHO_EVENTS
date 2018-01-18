@@ -174,13 +174,13 @@ public class DashBoardActivity extends AppCompatActivity
 
     private void createDataForNavigation() {
         strings.add("Dash Board");
-        strings.add("Products");
         strings.add("Orders");
-        strings.add("Food Menu Items");
+        strings.add("Products");
+        strings.add("Combo Products");
+        strings.add("Product Availability");
+        strings.add("Combo Products Availability");
         strings.add("Upload Service Document");
         strings.add("Upload Agreement Document");
-        strings.add("Product Availability");
-        strings.add("Product Combo");
 
     }
 
@@ -390,9 +390,7 @@ public class DashBoardActivity extends AppCompatActivity
             AppConstant.updated = null;
             navigation_drawer.closeDrawers();
             fragment = UploadServiceDocumentFragment.newInstance();
-            fragmentTransaction.beginTransaction()
-                    .replace(R.id.ll_fragment, fragment, UPLOADAGREEMENT)
-                    .commit();
+            fragmentTransaction.beginTransaction().replace(R.id.ll_fragment, fragment, UPLOADAGREEMENT).commit();
         } else if (s.equalsIgnoreCase("Dash Board")) {
             AppConstant.updated = null;
             navigation_drawer.closeDrawers();
@@ -402,6 +400,26 @@ public class DashBoardActivity extends AppCompatActivity
                     .commit();
         } else if (s.equalsIgnoreCase("Orders")) {
             gotoVendorOrderMgmnt();
+        }
+        else  if(s.equalsIgnoreCase("Product Availability")){
+            Intent intent = new Intent(this, VendorProductAvailbility.class);
+            startActivity(intent);
+
+        }
+        else  if(s.equalsIgnoreCase("Products")){
+            Intent intent = new Intent(this, ProductActivity.class);
+            startActivity(intent);
+
+        }
+        else  if(s.equalsIgnoreCase("Combo Products Availability")){
+            Intent intent = new Intent(this, ComboProductsAvailability.class);
+            startActivity(intent);
+
+        }
+        else  if(s.equalsIgnoreCase("Combo Products")){
+            Intent intent = new Intent(this, ComboProduct.class);
+            startActivity(intent);
+
         }
     }
 

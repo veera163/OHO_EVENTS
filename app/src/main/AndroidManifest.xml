@@ -58,6 +58,13 @@
         <activity android:name=".activity.ProductModuleActivity" />
         <activity android:name=".activity.SignOutActivity" />
         <activity android:name=".activity.VendorOrdersActivity"></activity>
+        <activity android:name=".activity.VendorProductAvailbility"/>
+        <activity android:name=".activity.ProductActivity"/>
+        <activity android:name=".activity.ComboProductsAvailability"/>
+        <activity android:name=".activity.ComboProduct"/>
+        <activity android:name=".activity.ProductAvailDates"/>
+        <activity android:name=".activity.CalendarDayDecoratorActivity"/>
+        <activity android:name=".activity.FullImage"/>
     </application>
 
 </manifest>

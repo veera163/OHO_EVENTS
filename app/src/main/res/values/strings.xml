@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Oho Pro</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="calendar_day_decorator">Calendar Day Decorator</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Enter Your Email</string>
@@ -15,6 +16,7 @@
         completions."
     </string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="spinner_title">Select Category</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Coming Soon</string>

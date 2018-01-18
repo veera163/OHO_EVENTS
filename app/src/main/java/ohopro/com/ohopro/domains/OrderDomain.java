@@ -20,7 +20,17 @@ public class OrderDomain {
     private String productImageUrl;
     private String pincode;
     private String lastUpdatedBy;
+    private String statusInDetail;
     private String productId;
+
+    public String getStatusInDetail() {
+        return statusInDetail;
+    }
+
+    public void setStatusInDetail(String statusInDetail) {
+        this.statusInDetail = statusInDetail;
+    }
+
     private String paymentMode;
     private String sellerPhone;
     private String contactName;
