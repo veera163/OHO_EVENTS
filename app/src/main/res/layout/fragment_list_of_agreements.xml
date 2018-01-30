@@ -18,10 +18,53 @@
         android:textSize="@dimen/mediumtextsize" />
 
     <include layout="@layout/header_list_of_agreements" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lst_vendor_agreements"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="3dp" />
+        android:id="@+id/hcontainer"
+        android:layout_marginTop="3dp"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ag_name"
+            android:paddingLeft="5dp"
+            android:text="ag_Name"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/mediumtextsize" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/ag_sdate"
+            android:paddingLeft="5dp"
+            android:text="Start Date"
+            android:textColor="@color/black"
+            android:textSize="@dimen/mediumtextsize" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:id="@+id/ag_edata"
+            android:text="End Date"
+            android:textColor="@color/black"
+            android:textSize="@dimen/mediumtextsize" />
+    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+     <!--<android.support.v7.widget.RecyclerView
+         android:id="@+id/lst_vendor_agreements"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_marginTop="3dp" />-->
 </LinearLayout>

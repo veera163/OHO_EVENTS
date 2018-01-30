@@ -13,44 +13,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_back"
+                <ImageView
+                    android:id="@+id/img_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_back"
-                    android:minHeight="28dip"
-                    android:text="back"
-                    android:textAllCaps="false"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/mediumtextsize" />
-
+                    android:src="@mipmap/ic_arrow_back" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:text="New Vendor Service"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/mediumtextsize" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="?attr/actionBarSize">
 
                 <TextView
                     android:id="@+id/tv_end_date_label"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
+                    android:paddingLeft="5dp"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
@@ -60,7 +57,7 @@
                 <EditText
                     android:id="@+id/edt_doc_name"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="7dp"
                     android:layout_weight="1"
                     android:background="@drawable/edt_border"
@@ -75,13 +72,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="?attr/actionBarSize">
 
                 <TextView
                     android:id="@+id/tv_type_of_doc"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
+                    android:paddingLeft="5dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Type of Document"
@@ -90,7 +89,7 @@
                 <EditText
                     android:id="@+id/edt_type_of_doc"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="7dp"
                     android:layout_weight="1"
                     android:background="@drawable/edt_border"
@@ -105,13 +104,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="?attr/actionBarSize">
 
                 <TextView
                     android:id="@+id/tv_issued_by"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
+                    android:paddingLeft="5dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Issued By"
@@ -120,7 +121,7 @@
                 <EditText
                     android:id="@+id/edt_issued_by"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="7dp"
                     android:layout_weight="1"
                     android:background="@drawable/edt_border"
@@ -135,44 +136,51 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="?attr/actionBarSize">
 
                 <TextView
                     android:id="@+id/tv_reason_label"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="35dp"
                     android:layout_margin="5dp"
+                    android:paddingLeft="5dp"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:text="Description"
                     android:textSize="@dimen/mediumtextsize" />
 
                 <EditText
                     android:id="@+id/edt_reason"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="120dp"
+                    android:gravity="left"
                     android:layout_margin="7dp"
+                    android:paddingLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/edt_border"
-                    android:enabled="true"
-                    android:gravity="center_vertical"
+                    android:textColor="#000000"
                     android:hint="Description"
-                    android:inputType="text"
-                    android:paddingLeft="4dp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/mediumtextsize" />
+                    android:background="@drawable/edt_border"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:lines="6"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:scrollHorizontally="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:minHeight="?attr/actionBarSize">
 
                 <TextView
-                    android:visibility="invisible"
                     android:id="@+id/tv_agreement_doc_lable"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
+                    android:layout_height="35dp"
+                    android:paddingLeft="5dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Services"
@@ -188,11 +196,12 @@
                     <TextView
                         android:id="@+id/tv_upload"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:ems="3"
                         android:enabled="true"
                         android:gravity="center_vertical"
-                        android:hint="click here to upload doc"
+                        android:hint="click here to upload"
+                        android:textColorHint="@color/colorPrimary"
                         android:maxLines="1"
                         android:paddingLeft="4dp"
                         android:textColor="@color/black"

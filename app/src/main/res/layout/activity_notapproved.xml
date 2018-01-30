@@ -23,25 +23,56 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-            <TextView
-                android:layout_marginLeft="8dp"
+            <ImageView
                 android:layout_width="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:id="@+id/logo"
-                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/logo" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/message"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+91 9100444100 \t\t 08772970118"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="center"
+            android:autoLink="phone"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="info@ohoevents.com"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="center"
+            android:autoLink="email"
+            android:textColorLink="@color/colorPrimary"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/navigation_drawer"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
-
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

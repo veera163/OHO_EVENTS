@@ -103,6 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:visibility="gone"
                 android:layout_marginBottom="?attr/actionBarSize"
                 android:minHeight="?attr/actionBarSize">
 
@@ -130,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:background="@drawable/form_btn_bg"
                     android:gravity="center">

@@ -6,6 +6,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Enter Your Email</string>
     <string name="prompt_password">Enter Your Password </string>
+    <string name="referral">Do you have Referral code? please Enter here.Otherwise leave it blank.</string>
+    <string name="signup_info">By Registering,you agree that you have read and accepted our Policies,you are at least 18 years old,and consent to our Privacy Notice and receiving marketing communications from us</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -17,6 +19,7 @@
     </string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
     <string name="spinner_title">Select Category</string>
+    <string name="message">Account approval is still in process. kindly contact customer care:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Coming Soon</string>

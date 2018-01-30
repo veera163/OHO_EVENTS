@@ -464,16 +464,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="2dp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Orders"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
@@ -482,14 +482,14 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart_orders"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="380dp"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Products"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
@@ -498,7 +498,22 @@
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/pie_chart"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="380dp"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Combo Products"
+                android:padding="5dp"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="@dimen/mediumtextsize" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart_combo"
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>

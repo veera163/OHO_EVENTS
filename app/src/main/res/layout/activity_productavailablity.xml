@@ -26,12 +26,15 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_arrow_back" />
 
-            <ImageView
+            <TextView
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
+                android:text="PRODUCT AVAILABILITY"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/logo" />
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 

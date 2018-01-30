@@ -49,31 +49,48 @@
             android:orientation="vertical">
 
             <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/logo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <com.rilixtech.CountryCodePicker
+                android:id="@+id/ccp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/logo" />
-
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                app:ccp_textColor="@color/black"
+                android:layout_weight="1"/>
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/ttl_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="6"
                 app:theme="@style/CustomTextInputLayout">
-
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
+                    android:hint="Enter your Mobile Number"
+                    android:inputType="phone"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/ttl_password"
                 android:layout_width="match_parent"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
                 app:theme="@style/CustomTextInputLayout">
 
                 <EditText
@@ -82,25 +99,31 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
+                    android:visibility="visible"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1" />
-
             </android.support.design.widget.TextInputLayout>
-
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_margin="16dp"
                 android:background="@color/colorPrimary"
                 android:minHeight="36dip"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
-
+            <TextView
+                android:id="@+id/signup_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

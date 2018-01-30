@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Vendor Name"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/mediumtextsize" />
 
@@ -19,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Start Date"
+        android:text="issuedBy"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/mediumtextsize" />
 
@@ -27,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="End Date"
+        android:text="vendorDocName"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="@dimen/mediumtextsize" />
 </LinearLayout>

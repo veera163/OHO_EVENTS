@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_bills"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,18 +25,29 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_arrow_back" />
 
-            <ImageView
+            <TextView
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:id="@+id/docname"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@mipmap/logo" />
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:id="@+id/hcontainer"
+        android:layout_marginTop="3dp"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/view_servicedoc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Food Menu Items"
-        android:gravity="center"/>
+        android:layout_margin="5dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
